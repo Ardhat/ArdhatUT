@@ -1,0 +1,28 @@
+{
+  "name": "ardhatut",
+  "version": "1.0.0",
+  "description": "Node JS test for Ardhat",
+  "main": "ardhatUnitTest.js",
+  "scripts": {
+    "test": "mocha ardhatUnitTest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ardhat/ArdhatUT.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ardhat/ArdhatUT/issues"
+  },
+  "homepage": "https://github.com/Ardhat/ArdhatUT",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "johnny-five": "^0.9.19",
+    "should": "^8.2.1",
+    "sprintf-js": "^1.0.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  }
+}
