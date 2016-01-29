@@ -39,8 +39,8 @@ board.on("ready", function() {
   led = new five.Led(9);
   extVoltage = new five.Sensor("A6");
   lipoVoltage = new five.Sensor("A7");
-  radioID = new five.Sensor("A2");
-
+  RFM69ID = new five.Sensor("A8");
+  RFM95ID = new five.Sensor("A9");
 });
 
 
@@ -100,9 +100,15 @@ describe('Ardhat Functional Test', function() {
   });
 
   describe("Radio detect", function(){
-    it("RFM69 ID should be 36", function(){
-      expect(radioID.value).to.equal(36);
+    it("Ardhat-W radio ID should be 36", function(){
+      expect(RFM69ID.value).to.equal(36);
     });
   });
+
+    describe("Radio detect", function(){
+      it("Ardhat-U radio ID should be 18", function(){
+        expect(RFM95ID.value).to.equal(18);
+      });
+    });
 
 });
