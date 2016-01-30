@@ -38,7 +38,7 @@ board.on("ready", function() {
 
   led = new five.Led(9);
   extVoltage = new five.Sensor("A6");
-  lipoVoltage = new five.Sensor("A7");
+  intVoltage = new five.Sensor("A7");
   RFM69ID = new five.Sensor("A8");
   RFM95ID = new five.Sensor("A9");
 });
@@ -49,8 +49,8 @@ board.on("ready", function() {
 
 describe('Ardhat Functional Test', function() {
 
-  describe('Connecting board', function() {
-    it('Should initialise Firmata', function(done) {
+  describe('Serial Port connection', function() {
+    it('should complete Firmata handshake', function(done) {
       this.timeout(10000);
       setTimeout(function() {
         assert.equal(board_ready, true);
@@ -59,7 +59,6 @@ describe('Ardhat Functional Test', function() {
     });
   });
 
-
   describe("External Voltage", function(){
     it("should be greater than 12V", function(){
       expect(extVoltage.value/27).to.be.above(12);
@@ -67,10 +66,10 @@ describe('Ardhat Functional Test', function() {
     });
   });
 
-  describe("LiPo Voltage", function(){
+  describe("Internal Voltage", function(){
     it("should be greater than 4V", function(){
-      expect(lipoVoltage.value/186).to.be.above(4);
-      console.log(sprintf("lipoVoltage: %4.2fV", lipoVoltage.value/186));
+      expect(intVoltage.value/186).to.be.above(4);
+      console.log(sprintf("intVoltage: %4.2fV", intVoltage.value/186));
     });
   });
 
@@ -81,31 +80,32 @@ describe('Ardhat Functional Test', function() {
     });
   });
 
-  describe("IMU detect", function(){
-    it("ID should be 113", function(){
-      (IMUid).should.equal(113);
-    });
-  });
-
-  describe("ENV detect", function(){
-      it("should be 88", function(){
-      (ENVid).should.equal(88);
-      });
-  });
-
-  describe("RTC detect", function(){
+  describe("RTC detect on I2C", function(){
     it("should be 8", function(){
       (RTCid).should.equal(8);
     });
   });
 
-  describe("Radio detect", function(){
+  describe("IMU detect on I2C", function(){
+    it("ID should be 113", function(){
+      (IMUid).should.equal(113);
+    });
+  });
+
+  describe("ENV detect on I2C", function(){
+      it("should be 88", function(){
+      (ENVid).should.equal(88);
+      });
+  });
+
+
+  describe("Radio detect on SPI", function(){
     it("Ardhat-W radio ID should be 36", function(){
       expect(RFM69ID.value).to.equal(36);
     });
   });
 
-    describe("Radio detect", function(){
+    describe("Radio detect on SPI", function(){
       it("Ardhat-U radio ID should be 18", function(){
         expect(RFM95ID.value).to.equal(18);
       });
